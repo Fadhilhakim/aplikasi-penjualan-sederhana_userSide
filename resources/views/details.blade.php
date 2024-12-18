@@ -66,7 +66,7 @@
 
               </div>
               <p class="text-gray-500 dark:text-gray-400">
-                Stock: {{ $details->stock }} | Terjual: {{ $details->sales_sum_quantity ?? 0 }}
+                Stock: {{ $details->stock }} | Terjual: {{ $details->sold_out }}
               </p>
               <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
                 <form action="{{ route('cart.store', $details->id) }}" method="POST">

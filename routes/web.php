@@ -11,15 +11,14 @@ use App\Models\DashboardDisplay;
 
 Route::get('/', function () {
     $dashboard = DashboardDisplay::all();
-    $products = Product::withSum('sales', 'quantity')->get()->map(function ($product) {
+    $products = Product::get()->map(function ($product) {
             $product->discounted_price = $product->price - ($product->price * ($product->discount_value / 100));
             return $product;
     });
     $discount_products = Product::where('discount', 'Y')->limit(4)->get();
-    $recomends = Product::withSum('sales', 'quantity') 
-        ->orderByDesc('sales_sum_quantity')    
-        ->take(4)                     
-        ->get();
+    $recomends = Product::orderByDesc('sold_out') 
+                ->take(4)                
+                ->get();
         
     return view('welcome', [
         'products' => $products, 
@@ -54,10 +53,10 @@ Route::post('/store/{id}', [KeranjangController::class, 'store'])->name('cart.st
 
 Route::post('/keranjang/{id}', [KeranjangController::class, 'destroy'])->name('keranjang.destroy');
 
-Route::post('/payment/checkout', [KeranjangController::class, 'pindahkanKeOrderRequests'])->name('pindahkan.order');
-Route::put('/order-request/update', [OrderRequestController::class, 'update'])->name('order_request.update');
-Route::get('/payment', [OrderRequestController::class, 'paymentView'])->name('payment.view');
-Route::post('/order/diterima/{user}/{date}', [OrderRequestController::class, 'barangDiterima'])->name('penjualan.barangDiterima');
+Route::post('/payment/checkout', [KeranjangController::class, 'pindahkanKeOrderRequests'])->name('pindahkan.order')->middleware('auth');
+Route::put('/order-request/update', [OrderRequestController::class, 'update'])->name('order_request.update')->middleware('auth');
+Route::get('/payment', [OrderRequestController::class, 'paymentView'])->name('payment.view')->middleware('auth');
+Route::post('/order/diterima/{user}/{date}', [OrderRequestController::class, 'barangDiterima'])->name('penjualan.barangDiterima')->middleware('auth');
 
 
 

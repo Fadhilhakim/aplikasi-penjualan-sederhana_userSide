@@ -38,7 +38,7 @@
                     
                     <div class="flex items-center">
                     
-                        <span class="mt-3 rounded-sm px-3 mr-2 bg-gray-100 text-sm font-medium text-white dark:text-gray-800">Terjual : {{ $product->sales_sum_quantity ?? 0 }}</span>
+                        <span class="mt-3 rounded-sm px-3 mr-2 bg-gray-100 text-sm font-medium text-white dark:text-gray-800">Terjual : {{ $product->sold_out }}</span>
                         <span class="mt-3 text-sm font-medium text-white dark:text-gray-300">Stock : {{ $product->stock }}</span>
                         
                     </div>

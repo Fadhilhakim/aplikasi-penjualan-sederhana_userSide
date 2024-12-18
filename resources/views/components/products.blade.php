@@ -34,7 +34,7 @@
                 <div class="p-2 flex-grow">
                     <a href="/details/{{ $product->name }}" class="mb-2 lg:text-lg text-sm font-semibold leading-tight text-gray-200 hover:underline dark:text-white">{{ Str::limit($product->name, 20, '...' )}}</a>
                     <div class="flex items-center">
-                        <span class="mt-3 rounded-sm px-3 mr-2 bg-gray-100 text-sm font-medium text-white dark:text-gray-800">Terjual : {{ $product->sales_sum_quantit ?? 0}}</span>
+                        <span class="mt-3 rounded-sm px-3 mr-2 bg-gray-100 text-sm font-medium text-white dark:text-gray-800">Terjual : {{ $product->sold_out }}</span>
                         <span class="mt-3 text-sm font-medium text-white dark:text-gray-300">Stock : {{ $product->stock }}</span>
                     </div>
                 </div>

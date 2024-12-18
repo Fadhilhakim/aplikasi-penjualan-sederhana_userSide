@@ -112,7 +112,7 @@ class OrderRequestController extends Controller
                 ]);
             }
 
-            $update = OrderRequest::where('user_id', Auth::id())
+            OrderRequest::where('user_id', Auth::id())
             ->where('status', 'MENUNGGU KONFIRMASI')->where('created_at', $date)
             ->update([
                 'status' => 'DITERIMA USER',
